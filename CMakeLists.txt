@@ -10,7 +10,8 @@ include_directories(
 )
 
 set(SOURCE_FILES
-#        src/tsp_setup.cpp   #Przykład dodania
+        src/package.cpp
+        src/storage_types.cpp
         )
 
 #add_executable(NetSim ${SOURCE_FILES} main.cpp)
