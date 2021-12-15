@@ -6,12 +6,12 @@
 
 class Package {
 public:
-    Package() {};
-    std::set<ElementID> assigned_IDs;
-    std::set<ElementID> freed_IDs;
+    Package();
+    static std::set<ElementID> assigned_IDs;
+    static std::set<ElementID> freed_IDs;
+    ElementID element;
 
-
-    ~Package() = default;
+    ~Package();
 };
 
 #endif //IMPLEMENTATION_PACKAGE_HPP

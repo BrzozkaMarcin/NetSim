@@ -14,5 +14,5 @@ set(SOURCE_FILES
         src/storage_types.cpp
         )
 
-#add_executable(NetSim ${SOURCE_FILES} main.cpp)
-add_executable(NetSim main.cpp)
+add_executable(NetSim ${SOURCE_FILES} main.cpp)
+#add_executable(NetSim main.cpp)

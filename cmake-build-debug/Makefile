@@ -168,6 +168,60 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/package.obj: src/package.cpp.obj
+
+.PHONY : src/package.obj
+
+# target to build an object file
+src/package.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/src/package.cpp.obj
+.PHONY : src/package.cpp.obj
+
+src/package.i: src/package.cpp.i
+
+.PHONY : src/package.i
+
+# target to preprocess a source file
+src/package.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/src/package.cpp.i
+.PHONY : src/package.cpp.i
+
+src/package.s: src/package.cpp.s
+
+.PHONY : src/package.s
+
+# target to generate assembly for a file
+src/package.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/src/package.cpp.s
+.PHONY : src/package.cpp.s
+
+src/storage_types.obj: src/storage_types.cpp.obj
+
+.PHONY : src/storage_types.obj
+
+# target to build an object file
+src/storage_types.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/src/storage_types.cpp.obj
+.PHONY : src/storage_types.cpp.obj
+
+src/storage_types.i: src/storage_types.cpp.i
+
+.PHONY : src/storage_types.i
+
+# target to preprocess a source file
+src/storage_types.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/src/storage_types.cpp.i
+.PHONY : src/storage_types.cpp.i
+
+src/storage_types.s: src/storage_types.cpp.s
+
+.PHONY : src/storage_types.s
+
+# target to generate assembly for a file
+src/storage_types.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NetSim.dir\build.make CMakeFiles/NetSim.dir/src/storage_types.cpp.s
+.PHONY : src/storage_types.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -180,6 +234,12 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/package.obj
+	@echo ... src/package.i
+	@echo ... src/package.s
+	@echo ... src/storage_types.obj
+	@echo ... src/storage_types.i
+	@echo ... src/storage_types.s
 .PHONY : help
 
 

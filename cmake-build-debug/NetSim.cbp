@@ -87,6 +87,12 @@
 		<Unit filename="D:/Programowanie/NetSim/main.cpp">
 			<Option target="NetSim"/>
 		</Unit>
+		<Unit filename="D:/Programowanie/NetSim/src/package.cpp">
+			<Option target="NetSim"/>
+		</Unit>
+		<Unit filename="D:/Programowanie/NetSim/src/storage_types.cpp">
+			<Option target="NetSim"/>
+		</Unit>
 		<Unit filename="D:/Programowanie/NetSim/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
