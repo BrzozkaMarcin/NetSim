@@ -2,8 +2,11 @@
 #include <set>
 
 Package::Package() {
-    if (1) {
+    if (assigned_IDs.empty()) {
         element = 1;
+        assigned_IDs.insert(element);
+    } else if (freed_IDs.empty() and ...) {
+        ...
     }
 
 };
