@@ -13,8 +13,8 @@ public:
     Package& operator=(Package&& other);
     ElementID get_id() const {return _element;}
 
-    static std::set<ElementID> assigned_IDs;
-    static std::set<ElementID> freed_IDs;
+    inline static std::set<ElementID> assigned_IDs;
+    inline static std::set<ElementID> freed_IDs;
 
     ~Package();
 

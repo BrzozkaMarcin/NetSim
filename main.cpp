@@ -9,11 +9,10 @@ int main() {
 
     Package pack1;
     Package pack2;
-    Package pack3(4);
-    ElementID ID_1 = pack1.get_id();
-    ElementID ID_2 = pack2.get_id();
-    ElementID ID_3 = pack3.get_id();
+    Package pack3(5);
+    Package pack4;
+    Package pack5;
+    Package pack6(Package(12));
 
-    std::cout << ID_1 << " " << ID_2 << " " << ID_3 << "\n";
     return 0;
 }

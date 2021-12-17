@@ -10,14 +10,22 @@ Package::Package() {
         _element = *freed_IDs.begin();
         freed_IDs.erase(freed_IDs.begin());
     } else {
+        ElementID assigned_IDs_size = (ElementID)assigned_IDs.size();
+        for (ElementID i = 1; i < assigned_IDs_size + 1; i++) {
+            if (assigned_IDs.find(i) == assigned_IDs.end()) {
+                _element = i;
+                break;
+            }
         _element = *(assigned_IDs.rbegin()) + 1;
+        }
+
     }
     assigned_IDs.insert(_element);
 }
 
 
 Package::Package(ElementID el) {
-    if (assigned_IDs.find(el) == assigned_IDs.end()) {
+    if (assigned_IDs.find(el) != assigned_IDs.end()) {
         try {
             throw std::invalid_argument("ID exists");
         } catch (std::invalid_argument& ex) {
