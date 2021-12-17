@@ -13,6 +13,8 @@ int main() {
     Package pack4;
     Package pack5;
     Package pack6(Package(12));
+    pack2.~Package();
+    Package pack7;
 
     return 0;
 }
