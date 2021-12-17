@@ -8,7 +8,7 @@ class Package {
 public:
     explicit Package();
     explicit Package(ElementID el);
-    Package(Package&& other);
+    Package(const Package&& other) : _element(other._element) {};
 
     Package& operator=(Package&& other);
     ElementID get_id() const {return _element;}

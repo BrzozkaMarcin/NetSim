@@ -43,11 +43,6 @@ Package::Package(ElementID el) {
 }
 
 
-Package::Package(Package&& other) {
-    _element = other._element;
-}
-
-
 Package &Package::operator=(Package &&other) {
     _element = other._element;
     return *this;
