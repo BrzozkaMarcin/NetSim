@@ -26,12 +26,12 @@ Package::Package() {
 
 Package::Package(ElementID el) {
     if (assigned_IDs.find(el) != assigned_IDs.end()) {
-        try {
-            throw std::invalid_argument("Error: ID exists");
-        } catch (std::invalid_argument& ex) {
-            std::cout << ex.what() << std::endl;
-        }
-//        throw std::invalid_argument("ID exists");
+//        try {
+//            throw std::invalid_argument("Error: ID exists");
+//        } catch (std::invalid_argument& ex) {
+//            std::cout << ex.what() << std::endl;
+//        }
+        throw std::invalid_argument("ID exists");
     }
     else {
         _element = el;
