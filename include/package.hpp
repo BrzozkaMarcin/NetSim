@@ -15,9 +15,11 @@ public:
 
     static std::set<ElementID> assigned_IDs;
     static std::set<ElementID> freed_IDs;
-    ElementID _element{};
 
     ~Package();
+
+private:
+    ElementID _element{};
 };
 
 #endif //IMPLEMENTATION_PACKAGE_HPP
