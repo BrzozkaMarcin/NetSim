@@ -2,7 +2,7 @@
 
 
 void PackageQueue::push(Package&& other){
-queue_.emplace_back(std::move(other));
+queue_.emplace_back(other);
 }
 
 bool PackageQueue::empty(){
@@ -18,18 +18,18 @@ std::size_t PackageQueue::size(){
 }
 
 Package PackageQueue::pop(){
-    const_iterator it;
     switch (queue_type_)
     {
-    case PackageQueueType::FIFO:
-        it = end();
-        return *it;
+    case PackageQueueType::FIFO:{
+        Package result = queue_.front();
         queue_.pop_back();
+        return result;
         break;
+    }
     default:
-        it = begin();
-        return *it;
+        Package result = queue_.back();
         queue_.pop_front();
+        return result;
         break;
     }
 }
