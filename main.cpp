@@ -39,9 +39,5 @@ int main() {
     fifo_pop = fifo_queue.pop();
     lifo_pop = lifo_queue.pop();
 
-
-
-
-
     return 0;
 }

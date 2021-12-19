@@ -23,7 +23,7 @@ public:
     virtual const_iterator end() const = 0;
     virtual const_iterator cend() const = 0;
 
-    virtual ~IPackageStockpile() {}
+    virtual ~IPackageStockpile() = default;
 };
 
 
@@ -37,8 +37,8 @@ public:
 
 class PackageQueue : public IPackageQueue {
 public:
-    PackageQueue(PackageQueueType queue_type) : queue_type_(queue_type) {}
-    void push(Package&& other) override {queue_.emplace_back(other);}
+    explicit PackageQueue(PackageQueueType queue_type) : queue_type_(queue_type) {}
+    void push(Package&& other) override {queue_.emplace_back(std::move(other));}
     bool empty() override {return queue_.empty();}
     std::size_t size() override {return queue_.size();}
     Package pop() override;
