@@ -4,9 +4,11 @@
 #include <list>
 #include "package.hpp"
 
+
 enum class PackageQueueType{
     FIFO, LIFO
 };
+
 
 class IPackageStockpile{
 public:
@@ -24,6 +26,7 @@ public:
     virtual ~IPackageStockpile() {}
 };
 
+
 class IPackageQueue : public IPackageStockpile {
 public:
     virtual Package pop() = 0;
@@ -31,14 +34,15 @@ public:
 
 };
 
+
 class PackageQueue : public IPackageQueue {
 public:
     PackageQueue(PackageQueueType queue_type) : queue_type_(queue_type) {}
-    void push(Package&& other) override;
-    bool empty() override;
-    std::size_t size() override;
+    void push(Package&& other) override {queue_.emplace_back(other);}
+    bool empty() override {return queue_.empty();}
+    std::size_t size() override {return queue_.size();}
     Package pop() override;
-    PackageQueueType get_queue_type() override;
+    PackageQueueType get_queue_type() override {return queue_type_;}
 
     const_iterator begin() const override {return queue_.begin();}
     const_iterator cbegin() const override {return queue_.cbegin();}
