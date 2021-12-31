@@ -1,20 +1,22 @@
 #include "storage_types.hpp"
-
+#include "stdexcept"
 
 Package PackageQueue::pop(){
-    switch (queue_type_)
-    {
-    case PackageQueueType::FIFO:{
-        Package result = queue_.front();
-        queue_.pop_back();
-        return result;
-        break;
+    if (empty()) {
+        throw std::logic_error("Empty queue");
     }
-    default:
-        Package result = queue_.back();
-        queue_.pop_front();
-        return result;
-        break;
+    switch (queue_type_) {
+        case PackageQueueType::FIFO:{
+            Package result = std::move(queue_.front());
+            queue_.pop_front();
+            return result;
+        }
+        case PackageQueueType::LIFO:{
+            Package result = std::move(queue_.back());
+            queue_.pop_back();
+            return result;
+        }
+        default:
+            throw std::logic_error("Wrong kind of queue");
     }
 }
-
