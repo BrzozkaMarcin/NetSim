@@ -5,7 +5,7 @@
 #include "package.hpp"
 
 
-enum class PackageQueueType{
+enum PackageQueueType{
     FIFO, LIFO
 };
 
@@ -13,7 +13,7 @@ enum class PackageQueueType{
 class IPackageStockpile{
 public:
     virtual void push(Package&& other) = 0;
-    virtual bool empty() = 0;
+    virtual bool empty() const = 0;
     virtual std::size_t size() = 0;
 
     using const_iterator = std::list<Package>::const_iterator;
@@ -31,15 +31,14 @@ class IPackageQueue : public IPackageStockpile {
 public:
     virtual Package pop() = 0;
     virtual PackageQueueType get_queue_type() = 0;
-
 };
 
 
 class PackageQueue : public IPackageQueue {
 public:
-    explicit PackageQueue(PackageQueueType queue_type) : queue_type_(queue_type) {}
+    PackageQueue(PackageQueueType queue_type) : queue_type_(queue_type) {}
     void push(Package&& other) override {queue_.emplace_back(std::move(other));}
-    bool empty() override {return queue_.empty();}
+    bool empty() const override {return queue_.empty();}
     std::size_t size() override {return queue_.size();}
     Package pop() override;
     PackageQueueType get_queue_type() override {return queue_type_;}
