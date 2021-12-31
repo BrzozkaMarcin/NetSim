@@ -6,8 +6,8 @@
 
 class Package {
 public:
-    explicit Package();
-    explicit Package(ElementID el);
+    Package();
+    Package(ElementID el);
     Package(Package&& other) : _element(other._element) {};
 
     Package& operator=(Package&& other);
