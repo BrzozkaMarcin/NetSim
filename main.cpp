@@ -14,8 +14,8 @@ int main() {
 //    Package pack6(Package(12));
 //    pack2.~Package();
 //    Package pack7;
-    // std::cout << pack1.get_id() << "\n" << pack2.get_id() << "\n" << pack3.get_id() << "\n";
-    // std::cout << pack4.get_id() << "\n" << pack5.get_id() << "\n" << pack6.get_id() << "\n" << pack7.get_id() << "\n";
+//    std::cout << pack1.get_id() << "\n" << pack2.get_id() << "\n" << pack3.get_id() << "\n";
+//    std::cout << pack4.get_id() << "\n" << pack5.get_id() << "\n" << pack6.get_id() << "\n" << pack7.get_id() << "\n";
 
     PackageQueue fifo_queue(PackageQueueType::FIFO);
     PackageQueue lifo_queue(PackageQueueType::LIFO);
