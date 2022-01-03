@@ -21,23 +21,23 @@ int main() {
     PackageQueue lifo_queue(PackageQueueType::LIFO);
     std::cout<<fifo_queue.empty()<< "\n" << lifo_queue.empty() << "\n";
     std::cout<<fifo_queue.size()<< "\n" << lifo_queue.size() << "\n";
-    fifo_queue.push(Package());
-    fifo_queue.push(Package());
-    fifo_queue.push(Package());
-    fifo_queue.push(Package());
-    fifo_queue.push(Package());
+    fifo_queue.push(Package(1));
+    fifo_queue.push(Package(2));
+    fifo_queue.push(Package(3));
+    fifo_queue.push(Package(4));
+    fifo_queue.push(Package(5));
 
-    lifo_queue.push(Package());
-    lifo_queue.push(Package());
-    lifo_queue.push(Package());
-    lifo_queue.push(Package());
-    lifo_queue.push(Package());
+    lifo_queue.push(Package(6));
+    lifo_queue.push(Package(7));
+    lifo_queue.push(Package(8));
+    lifo_queue.push(Package(9));
+    lifo_queue.push(Package(11));
 
     
     Package fifo_pop;
     Package lifo_pop;
     fifo_pop = fifo_queue.pop();
     lifo_pop = lifo_queue.pop();
-
+    PackageQueueType tp = fifo_queue.get_queue_type();
     return 0;
 }

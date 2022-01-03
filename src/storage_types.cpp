@@ -1,3 +1,7 @@
+// Marcin Brzózka, nr 405499
+// Stanisław Dudiak, nr 406903
+// Adam Pękala, nr 405380
+
 #include "storage_types.hpp"
 #include "stdexcept"
 

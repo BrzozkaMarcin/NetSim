@@ -1,6 +1,10 @@
 #ifndef IMPLEMENTATION_STORAGE_TYPES_HPP
 #define IMPLEMENTATION_STORAGE_TYPES_HPP
 
+// Marcin Brzózka, nr 405499
+// Stanisław Dudiak, nr 406903
+// Adam Pękala, nr 405380
+
 #include <list>
 #include "package.hpp"
 

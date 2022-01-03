@@ -1,6 +1,10 @@
 #ifndef IMPLEMENTATION_PACKAGE_HPP
 #define IMPLEMENTATION_PACKAGE_HPP
 
+// Marcin Brzózka, nr 405499
+// Stanisław Dudiak, nr 406903
+// Adam Pękala, nr 405380
+
 #include "types.hpp"
 #include <set>
 
