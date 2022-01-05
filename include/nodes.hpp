@@ -4,6 +4,7 @@
 // Stanisław Dudiak, nr 406903
 // Adam Pękala, nr 405380
 #include <map> 
+#include "types.hpp"
 class PackageSender{
 public:
     ReceiverPreferences Receiver_preferences_;
@@ -31,7 +32,6 @@ public:
 private:
     preferences_t preferences_;
     ProbabilityGenerator pg_;
-
 };
 
 class IPackageReceiver {
