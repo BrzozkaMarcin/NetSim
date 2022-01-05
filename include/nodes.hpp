@@ -27,7 +27,7 @@ public:
     void add_receiver(IPackageReceiver* r);
     void remove_receiver(IPackageReceiver* r);
     IPackageReceiver* choose_receiver();
-    const preferences_t& get_preferences() const;
+    const preferences_t& get_preferences() const{return preferences_};
     
 private:
     preferences_t preferences_;
