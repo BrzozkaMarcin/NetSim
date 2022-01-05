@@ -13,10 +13,9 @@ public:
 
 class RecieverPreferences{
 public:
-    RecieverPreferences(ProbabilityGenerator pg);
+    RecieverPreferences(ProbabilityGenerator pg) : pg_(pg){}
     using preferences_t = std::map<IPackageReciever*,double>;
     using const_iterator = preferences_t::const_iterator;
-    preferences_t preferences_;
     const_iterator begin(){return preferences_.begin();}
     const_iterator end(){return preferences_.end();}
     const_iterator cbegin(){return preferences_.cbegin();}
@@ -24,7 +23,10 @@ public:
     void add_reciever(IpackageReciever* r);
     void remove_reciever(IpackageReciever* r);
     IpackageReciever* choose_reciever();
-    preferences_t& get_preferences()
+    const preferences_t& get_preferences() const;
+private:
+    preferences_t preferences_;
+    ProbabilityGenerator pg_;
 
 };
 
