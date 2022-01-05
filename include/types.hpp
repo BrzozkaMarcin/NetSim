@@ -9,4 +9,8 @@
 //using ElementID = std::size_t;
 using ElementID = unsigned int;
 
+using ProbabilityGenerator = std::function<double(void)>;
+using Time = int;
+using TimeOffset = int;
+
 #endif //IMPLEMENTATION_TYPES_HPP
