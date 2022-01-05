@@ -1,5 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/NetSim.dir/main.cpp.obj"
+  "CMakeFiles/NetSim.dir/src/factory.cpp.obj"
+  "CMakeFiles/NetSim.dir/src/helpers.cpp.obj"
+  "CMakeFiles/NetSim.dir/src/nodes.cpp.obj"
   "CMakeFiles/NetSim.dir/src/package.cpp.obj"
   "CMakeFiles/NetSim.dir/src/storage_types.cpp.obj"
   "NetSim.exe"

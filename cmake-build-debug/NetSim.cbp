@@ -87,6 +87,15 @@
 		<Unit filename="D:/Programowanie/NetSim/main.cpp">
 			<Option target="NetSim"/>
 		</Unit>
+		<Unit filename="D:/Programowanie/NetSim/src/factory.cpp">
+			<Option target="NetSim"/>
+		</Unit>
+		<Unit filename="D:/Programowanie/NetSim/src/helpers.cpp">
+			<Option target="NetSim"/>
+		</Unit>
+		<Unit filename="D:/Programowanie/NetSim/src/nodes.cpp">
+			<Option target="NetSim"/>
+		</Unit>
 		<Unit filename="D:/Programowanie/NetSim/src/package.cpp">
 			<Option target="NetSim"/>
 		</Unit>
