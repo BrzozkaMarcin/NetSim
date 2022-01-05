@@ -1,7 +1,7 @@
 #ifndef IMPLEMENTATION_TYPES_HPP
 #define IMPLEMENTATION_TYPES_HPP
 //#include <iostream>
-
+#include <functional>
 // Marcin Brzózka, nr 405499
 // Stanisław Dudiak, nr 406903
 // Adam Pękala, nr 405380

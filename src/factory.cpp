@@ -2,3 +2,4 @@
 // Stanisław Dudiak, nr 406903
 // Adam Pękala, nr 405380
 
+#include "factory.hpp"

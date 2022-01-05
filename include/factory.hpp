@@ -4,10 +4,13 @@
 // Stanisław Dudiak, nr 406903
 // Adam Pękala, nr 405380
 #include "nodes.hpp"
+#include "types.hpp"
+#include <list>
 
 enum class NodeColor {
     UNVISITED, VISITED, VERIFIED
 };
+
 
 template <class Node>
 class NodeCollection{
@@ -56,9 +59,11 @@ private:
     list nodes_list_;
 };
 
+
 class Ramps : public NodeCollection<Ramp> {};
 class Workers : public NodeCollection<Worker> {};
 class Storehouses : public NodeCollection<Storehouse> {};
+
 
 class Factory{
 public:
