@@ -1,6 +1,9 @@
 #include "package.hpp"
 #include "storage_types.hpp"
 #include "types.hpp"
+#include "factory.hpp"
+#include "helpers.hpp"
+#include "nodes.hpp"
 #include <iostream>
 #include <set>
 #include <stdexcept>
