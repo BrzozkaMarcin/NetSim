@@ -32,4 +32,6 @@ void ReceiverPreferences::remove_receiver(IPackageReceiver* r){
     return nullptr;
 }
 
-
+void PackageSender::send_package(){
+    
+}

@@ -5,10 +5,18 @@
 // Adam Pękala, nr 405380
 #include <map> 
 #include "types.hpp"
+#include "package.hpp"
 class PackageSender{
 public:
-    ReceiverPreferences Receiver_preferences_;
+    PackageSender(PackageSender&& other) = default;
     void send_package();
+    ReceiverPreferences receiver_preferences_;
+    const std::optional<Package>& get_sending_buffer() const {return buffer_;}
+
+protected:
+    void push_package(Package&& package){buffer_.emplace(std::move(package));}
+private:
+    std::optional<Package> buffer_;
     
 };
 
