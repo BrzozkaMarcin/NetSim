@@ -6,9 +6,11 @@
 #include <map> 
 #include "types.hpp"
 #include "package.hpp"
+
 class PackageSender{
 public:
     PackageSender(PackageSender&& other) = default;
+    PackageSender() = default;
     void send_package();
     ReceiverPreferences receiver_preferences_;
     const std::optional<Package>& get_sending_buffer() const {return buffer_;}
@@ -35,11 +37,23 @@ public:
     void add_receiver(IPackageReceiver* r);
     void remove_receiver(IPackageReceiver* r);
     IPackageReceiver* choose_receiver();
-    const preferences_t& get_preferences() const{return preferences_};
+    const preferences_t& get_preferences() const{return preferences_;}
     
 private:
     preferences_t preferences_;
     ProbabilityGenerator pg_;
+};
+
+class Ramp : public PackageSender{
+public:
+    Ramp(ElementID id, TimeOffset di) : id_(id),di_(di) {}
+    void deliver_goods(Time t);
+    const TimeOffset get_delivery_interval() const{return di_;}
+    const ElementID get_id() const{return id_;}
+private:
+    ElementID id_;
+    TimeOffset di_;
+
 };
 
 class IPackageReceiver {

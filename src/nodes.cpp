@@ -33,5 +33,18 @@ void ReceiverPreferences::remove_receiver(IPackageReceiver* r){
 }
 
 void PackageSender::send_package(){
+    if (buffer_.has_value()){
+        auto receiver = receiver_preferences_.choose_receiver();
+        if (receiver != nullptr){
+            receiver->receive_package(std::move(*buffer_));
+            buffer_.reset();
+        }
+    }
     
+}
+
+void Ramp::deliver_goods(Time t){
+    if(t % di_ == 1){
+        push_package(Package());
+    }
 }
