@@ -21,7 +21,7 @@ void ReceiverPreferences::remove_receiver(IPackageReceiver* r){
 }
 
  IPackageReceiver* ReceiverPreferences::choose_receiver(){
-    int p_sum = 0;
+    double p_sum = 0;
     auto rand_value = pg_();
     for(const auto& x : preferences_){
         p_sum += x.second;
