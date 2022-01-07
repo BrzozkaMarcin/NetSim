@@ -67,8 +67,32 @@ class Storehouses : public NodeCollection<Storehouse> {};
 
 class Factory{
 public:
+    void add_ramp(Ramp&& other) { ramps_.add(std::move(other)); };
+    void remove_ramp(ElementID id) { ramps_.remove_by_id(id); };
+    NodeCollection<Ramp>::iterator find_ramp_by_id(ElementID id) { return ramps_.find_by_id(id); };
+    NodeCollection<Ramp>::const_iterator find_ramp_by_id(ElementID id) const { return ramps_.find_by_id(id); };
+    std::list<Ramp>::const_iterator ramp_cend() const { return ramps_.cend();}
+    std::list<Ramp>::const_iterator ramp_cbegin() const { return ramps_.cbegin();}
+    std::list<Ramp>::iterator ramp_end() { return ramps_.end();}
+    std::list<Ramp>::iterator ramp_begin() { return ramps_.begin();}
 
+    void add_worker(Worker&& other) { workers_.add(std::move(other)); };
+    void remove_worker(ElementID id);
+    NodeCollection<Worker>::iterator find_worker_by_id(ElementID id) { return workers_.find_by_id(id); };
+    NodeCollection<Worker>::const_iterator find_worker_by_id(ElementID id) const { return workers_.find_by_id(id); };
+    std::list<Worker>::const_iterator worker_cbegin() const {return workers_.cbegin();}
+    std::list<Worker>::const_iterator worker_cend() const {return workers_.cend();}
+    std::list<Worker>::iterator worker_begin() {return workers_.begin();}
+    std::list<Worker>::iterator worker_end() {return workers_.end();}
 
+    void add_storehouse(Storehouse&& other) { storehouses_.add(std::move(other)); };
+    void remove_storehouse(ElementID id) { storehouses_.remove_by_id(id); };
+    NodeCollection<Storehouse>::iterator find_storehouse_by_id(ElementID id) { return storehouses_.find_by_id(id); };
+    NodeCollection<Storehouse>::const_iterator find_storehouse_by_id(ElementID id) const { return storehouses_.find_by_id(id); };
+    std::list<Storehouse>::const_iterator storehouse_cbegin() const { return storehouses_.cbegin();}
+    std::list<Storehouse>::const_iterator storehouse_cend() const { return storehouses_.cend();}
+    std::list<Storehouse>::iterator storehouse_begin() { return storehouses_.begin();}
+    std::list<Storehouse>::iterator storehouse_end() { return storehouses_.end();}
 
 
 private:
