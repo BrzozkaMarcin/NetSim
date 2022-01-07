@@ -94,6 +94,9 @@ public:
     std::list<Storehouse>::iterator storehouse_begin() { return storehouses_.begin();}
     std::list<Storehouse>::iterator storehouse_end() { return storehouses_.end();}
 
+    bool has_reachable_storehouse(const PackageSender* sender, std::map<const PackageSender*, NodeColor>& node_colors) const;
+    bool is_consistent() const;
+
     void do_deliveries(Time time);
     void do_package_passing();
     void do_work(Time time);
