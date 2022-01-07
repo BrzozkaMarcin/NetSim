@@ -16,3 +16,27 @@ void Factory::remove_worker(ElementID id) {
     }
     workers_.remove_by_id(id);
 }
+
+
+void Factory::do_deliveries(Time time) {
+    for(auto& ramp : ramps_) {
+        ramp.deliver_goods(time);
+    }
+}
+
+
+void Factory::do_package_passing() {
+    for(auto& ramp : ramps_) {
+        ramp.send_package();
+    }
+    for(auto& worker : workers_) {
+        worker.send_package();
+    }
+}
+
+
+void Factory::do_work(Time time) {
+    for(auto& worker : workers_){
+        worker.do_work(time);
+    }
+}

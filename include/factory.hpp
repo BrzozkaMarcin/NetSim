@@ -94,6 +94,9 @@ public:
     std::list<Storehouse>::iterator storehouse_begin() { return storehouses_.begin();}
     std::list<Storehouse>::iterator storehouse_end() { return storehouses_.end();}
 
+    void do_deliveries(Time time);
+    void do_package_passing();
+    void do_work(Time time);
 
 private:
     NodeCollection <Worker> workers_;

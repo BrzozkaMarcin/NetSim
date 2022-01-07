@@ -27,7 +27,7 @@ protected:
     void push_package(Package&& package){buffer_.emplace(std::move(package));}
 private:
     std::optional<Package> buffer_;
-    
+
 };
 
 class ReceiverPreferences{
