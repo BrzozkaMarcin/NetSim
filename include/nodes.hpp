@@ -3,7 +3,15 @@
 // Marcin Brzózka, nr 405499
 // Stanisław Dudiak, nr 406903
 // Adam Pękala, nr 405380
-#include <map> 
+#include <map>
+#include "storage_types.hpp"
+#include "helpers.hpp"
+#include <memory>
+
+enum class ReceiverType{
+    WORKER, STOREHOUSE
+};
+
 #include "types.hpp"
 #include "package.hpp"
 
@@ -72,4 +80,53 @@ public:
     virtual ~IPackageReceiver() = default;
 };
 
+class Storehouse : public IPackageReceiver {
+public:
+    explicit Storehouse(ElementID id, std::unique_ptr<IPackageStockpile> ptr = std::make_unique<PackageQueue>(PackageQueueType::LIFO)) : storehouse_id_(id), ptr_(std::move(ptr)) {}
+    ElementID get_id() const override { return storehouse_id_; }
+    void receive_package(Package &&p) override { ptr_->push(std::move(p)); };
+    ReceiverType get_receiver_type() const override { return ReceiverType::STOREHOUSE;}
+
+
+    const_iterator begin() const override {return ptr_->begin();}
+    const_iterator end() const override {return ptr_->end();}
+    const_iterator cbegin() const override {return ptr_->cbegin();}
+    const_iterator cend() const override {return ptr_->cend();}
+
+private:
+    ElementID storehouse_id_;
+    std::unique_ptr<IPackageStockpile> ptr_;
+};
+
+class Worker : public IPackageReceiver , public PackageSender{
+public:
+    Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q) : worker_id_(id), pd_(pd), q_(std::move(q)) {}
+
+    void do_work(Time t);
+
+    TimeOffset get_processing_duration() const { return pd_; }
+    Time get_package_processing_start_time() const { return start_time_; }
+    ElementID get_id() const override { return worker_id_; }
+
+    void receive_package(Package&& p) override;
+
+    ReceiverType get_receiver_type() const override { return ReceiverType::WORKER; }
+    IPackageQueue* get_queue() const {return q_.get();}
+    std::optional<Package> get_processing_buffer() {return processing_buffer_; }
+
+    bool is_pbuffer() const { return processing_buffer_.has_value();}
+    const std::optional<Package>& get_pbuffer() const {return processing_buffer_; }
+
+    const_iterator begin() const override {return q_->begin();}
+    const_iterator end() const override {return q_->end();}
+    const_iterator cbegin() const override {return q_->cbegin();}
+    const_iterator cend() const override {return q_->cend();}
+
+private:
+    TimeOffset pd_;
+    ElementID worker_id_;
+    Time start_time_ = 0;
+    std::unique_ptr<IPackageQueue> q_;
+    std::optional<Package> processing_buffer_;
+};
 #endif //IMPLEMENTATION_NODES_HPP
