@@ -2,6 +2,7 @@
 // Stanisław Dudiak, nr 406903
 // Adam Pękala, nr 405380
 #include <nodes.hpp>
+#include "helpers.hpp"
 
 void ReceiverPreferences::add_receiver(IPackageReceiver* r){
     preferences_t new_receiver{{std::move(r),1.0}};
@@ -47,4 +48,22 @@ void Ramp::deliver_goods(Time t){
     if(t % di_ == 1){
         push_package(Package());
     }
+}
+
+void Worker::do_work(Time t) {
+    if (!q_->empty() and !processing_buffer_.has_value()) {
+        start_time_ = t;
+        processing_buffer_.emplace(q_->pop());
+    }
+    if (t - start_time_ + 1 == pd_) {
+        push_package(std::move(*processing_buffer_));
+        processing_buffer_.reset();
+        start_time_ = 0;
+    }
+
+}
+
+void Worker::receive_package(Package&& p) {
+    q_->push(std::move(p));
+
 }

@@ -7,6 +7,7 @@
 #include "storage_types.hpp"
 #include "helpers.hpp"
 #include <memory>
+#include <optional>
 
 enum class ReceiverType{
     WORKER, STOREHOUSE
@@ -30,6 +31,9 @@ public:
 
     virtual ~IPackageReceiver() = default;
 };
+
+using preferences_t = std::map<IPackageReceiver*, double>;
+using const_iterator = preferences_t::const_iterator;
 
 class ReceiverPreferences{
 public:
@@ -95,7 +99,7 @@ public:
 
     ReceiverType get_receiver_type() const override { return ReceiverType::WORKER; }
     IPackageQueue* get_queue() const {return q_.get();}
-    std::optional<Package> get_processing_buffer() {return processing_buffer_; }
+    std::optional<Package>& get_processing_buffer() {return processing_buffer_; }
 
     bool is_pbuffer() const { return processing_buffer_.has_value();}
     const std::optional<Package>& get_pbuffer() const {return processing_buffer_; }
