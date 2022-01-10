@@ -8,7 +8,7 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r){
     preferences_t new_receiver{{std::move(r),1.0}};
     preferences_.merge(new_receiver);
     if(!preferences_.empty()){
-        float probability = 1 / preferences_.size();
+        float probability = 1 / static_cast<float>(preferences_.size());
         for (auto& x : preferences_){
             x.second = probability;
         }
@@ -18,7 +18,7 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r){
 void ReceiverPreferences::remove_receiver(IPackageReceiver* r){
     preferences_.erase(r);
     if(!preferences_.empty()){
-        float probability = 1 / preferences_.size();
+        float probability = 1 / static_cast<float>(preferences_.size());
         for (auto& x : preferences_){
             x.second = probability;
         }
