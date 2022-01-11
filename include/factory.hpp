@@ -109,4 +109,8 @@ private:
     void remove_receiver(NodeCollection<Node>& collection, ElementID id) {collection.remove_by_id(id);}
 };
 
+
+Factory load_factory_structure(std::istream& is);
+void save_factory_structure(Factory&  factory, std::ostream& os);
+
 #endif //IMPLEMENTATION_FACTORY_HPP

@@ -99,3 +99,18 @@ void Factory::do_work(Time time) {
         worker.do_work(time);
     }
 }
+
+
+
+Factory load_factory_structure(std::istream& is) {
+    Factory factory;
+    //..............................................................//
+    //..............................................................//
+    //..............................................................//
+    return factory;
+}
+
+
+void save_factory_structure(Factory& factory,std::ostream& os) {
+
+}
