@@ -1,0 +1,9 @@
+#ifndef IMPLEMENTATION_SIMULATION_HPP
+#define IMPLEMENTATION_SIMULATION_HPP
+// Marcin Brzózka, nr 405499
+// Stanisław Dudiak, nr 406903
+// Adam Pękala, nr 405380
+
+
+
+#endif //IMPLEMENTATION_SIMULATION_HPP

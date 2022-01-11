@@ -145,10 +145,38 @@ CMakeFiles/NetSim.dir/src/factory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NetSim.dir/src/factory.cpp.s"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Programowanie\NetSim\src\factory.cpp -o CMakeFiles\NetSim.dir\src\factory.cpp.s
 
+CMakeFiles/NetSim.dir/src/reports.cpp.obj: CMakeFiles/NetSim.dir/flags.make
+CMakeFiles/NetSim.dir/src/reports.cpp.obj: CMakeFiles/NetSim.dir/includes_CXX.rsp
+CMakeFiles/NetSim.dir/src/reports.cpp.obj: ../src/reports.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Programowanie\NetSim\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/NetSim.dir/src/reports.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\NetSim.dir\src\reports.cpp.obj -c D:\Programowanie\NetSim\src\reports.cpp
+
+CMakeFiles/NetSim.dir/src/reports.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NetSim.dir/src/reports.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Programowanie\NetSim\src\reports.cpp > CMakeFiles\NetSim.dir\src\reports.cpp.i
+
+CMakeFiles/NetSim.dir/src/reports.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NetSim.dir/src/reports.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Programowanie\NetSim\src\reports.cpp -o CMakeFiles\NetSim.dir\src\reports.cpp.s
+
+CMakeFiles/NetSim.dir/src/simulation.cpp.obj: CMakeFiles/NetSim.dir/flags.make
+CMakeFiles/NetSim.dir/src/simulation.cpp.obj: CMakeFiles/NetSim.dir/includes_CXX.rsp
+CMakeFiles/NetSim.dir/src/simulation.cpp.obj: ../src/simulation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Programowanie\NetSim\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/NetSim.dir/src/simulation.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\NetSim.dir\src\simulation.cpp.obj -c D:\Programowanie\NetSim\src\simulation.cpp
+
+CMakeFiles/NetSim.dir/src/simulation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NetSim.dir/src/simulation.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Programowanie\NetSim\src\simulation.cpp > CMakeFiles\NetSim.dir\src\simulation.cpp.i
+
+CMakeFiles/NetSim.dir/src/simulation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NetSim.dir/src/simulation.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Programowanie\NetSim\src\simulation.cpp -o CMakeFiles\NetSim.dir\src\simulation.cpp.s
+
 CMakeFiles/NetSim.dir/main.cpp.obj: CMakeFiles/NetSim.dir/flags.make
 CMakeFiles/NetSim.dir/main.cpp.obj: CMakeFiles/NetSim.dir/includes_CXX.rsp
 CMakeFiles/NetSim.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Programowanie\NetSim\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/NetSim.dir/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Programowanie\NetSim\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/NetSim.dir/main.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\NetSim.dir\main.cpp.obj -c D:\Programowanie\NetSim\main.cpp
 
 CMakeFiles/NetSim.dir/main.cpp.i: cmake_force
@@ -166,6 +194,8 @@ NetSim_OBJECTS = \
 "CMakeFiles/NetSim.dir/src/nodes.cpp.obj" \
 "CMakeFiles/NetSim.dir/src/helpers.cpp.obj" \
 "CMakeFiles/NetSim.dir/src/factory.cpp.obj" \
+"CMakeFiles/NetSim.dir/src/reports.cpp.obj" \
+"CMakeFiles/NetSim.dir/src/simulation.cpp.obj" \
 "CMakeFiles/NetSim.dir/main.cpp.obj"
 
 # External object files for target NetSim
@@ -176,12 +206,14 @@ NetSim.exe: CMakeFiles/NetSim.dir/src/storage_types.cpp.obj
 NetSim.exe: CMakeFiles/NetSim.dir/src/nodes.cpp.obj
 NetSim.exe: CMakeFiles/NetSim.dir/src/helpers.cpp.obj
 NetSim.exe: CMakeFiles/NetSim.dir/src/factory.cpp.obj
+NetSim.exe: CMakeFiles/NetSim.dir/src/reports.cpp.obj
+NetSim.exe: CMakeFiles/NetSim.dir/src/simulation.cpp.obj
 NetSim.exe: CMakeFiles/NetSim.dir/main.cpp.obj
 NetSim.exe: CMakeFiles/NetSim.dir/build.make
 NetSim.exe: CMakeFiles/NetSim.dir/linklibs.rsp
 NetSim.exe: CMakeFiles/NetSim.dir/objects1.rsp
 NetSim.exe: CMakeFiles/NetSim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Programowanie\NetSim\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable NetSim.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Programowanie\NetSim\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable NetSim.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\NetSim.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -16,11 +16,13 @@ set(SOURCE_FILES
         src/nodes.cpp
         src/helpers.cpp
         src/factory.cpp
+        src/reports.cpp
+        src/simulation.cpp
         )
 
 set(SOURCES_FILES_TESTS
-        test/test_package.cpp
-        test/test_storage_types.cpp
+#        test/test_package.cpp
+#        test/test_storage_types.cpp
         test/test_nodes.cpp
         test/test_Factory.cpp
         )
