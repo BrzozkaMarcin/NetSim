@@ -5,6 +5,10 @@
 #include "factory.hpp"
 #include <map>
 #include <stdexcept>
+#include <string>
+#include <istream>
+#include <sstream>
+#include <vector>
 
 void Factory::remove_worker(ElementID id) {
     for (auto& ramp : ramps_) {
@@ -100,6 +104,28 @@ void Factory::do_work(Time time) {
     }
 }
 
+
+
+enum ElementType {
+    RAMP, WORKER, STOREHOUSE, LINK
+};
+struct ParsedLineData {
+    ElementType element_type;
+    std::map<std::string, std::string> parameters;
+};
+
+
+ParsedLineData parse_line(std::string line) {
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream token_stream(line);
+    char delimiter = ' ';
+    while (std::getline(token_stream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+
+
+}
 
 
 Factory load_factory_structure(std::istream& is) {
