@@ -200,10 +200,24 @@ Factory load_factory_structure(std::istream& is) {
             ElementID dest_id = std::stoi(dest_tokens[1]);
 
             if (src_tokens[0] == "worker") {
-
+                auto worker = factory.find_worker_by_id(src_id);
+                if (dest_tokens[0] == "store") {
+                    auto storehouse = factory.find_storehouse_by_id(dest_id);
+                    worker->receiver_preferences_.add_receiver(&(*storehouse));
+                } else if (dest_tokens[0] == "worker") {
+                    auto second_worker = factory.find_worker_by_id(dest_id);
+                    worker->receiver_preferences_.add_receiver(&(*second_worker));
+                } else { throw std::logic_error("Unknown data"); }
 
             } else if (src_tokens[0] == "store") {
-
+                auto ramp = factory.find_ramp_by_id(src_id);
+                if (dest_tokens[0] == "worker") {
+                    auto worker = factory.find_worker_by_id(dest_id);
+                    ramp->receiver_preferences_.add_receiver(&(*worker));
+                } else if (dest_tokens[0] == "store") {
+                    auto storehouse = factory.find_storehouse_by_id(dest_id);
+                    ramp->receiver_preferences_.add_receiver(&(*storehouse));
+                } else { throw std::logic_error("Unknown data"); }
 
             } else if (src_tokens[0] == "ramp") {
                 throw std::logic_error("...");
@@ -216,8 +230,67 @@ Factory load_factory_structure(std::istream& is) {
 }
 
 
-//void save_factory_structure(Factory& factory,std::ostream& os) {
-//    //..............................................................//
-//    //..............................................................//
-//    //..............................................................//
-//}
+std::vector<std::string> LinksHelper(Factory& factory){
+    std::vector<std::string> links;
+    for(auto it = factory.ramp_begin(); it!=factory.ramp_end(); it++){
+        for (auto& ipr : it->receiver_preferences_.get_preferences()) {
+            std::stringstream link;
+            link << "src=ramp-" << it->get_id();
+            switch (ipr.first->get_receiver_type()) {
+                case (ReceiverType::WORKER) :
+                    link << " dest=worker-" << ipr.first->get_id();
+                    break;
+                case (ReceiverType::STOREHOUSE) :
+                    link << " dest=store-" << ipr.first->get_id();
+                    break;
+                default:
+                    throw std::logic_error("Unknown data");
+            }
+            links.push_back(link.str());
+        }
+    }
+
+    for(auto it = factory.worker_begin();it!=factory.worker_end();it++) {
+        for (auto& ipr : it->receiver_preferences_.get_preferences()) {
+            std::stringstream link;
+            link << "src=worker-" << it->get_id();
+            switch (ipr.first->get_receiver_type()) {
+                case (ReceiverType::WORKER) :
+                    link << " dest=worker-" << ipr.first->get_id();
+                    break;
+                case (ReceiverType::STOREHOUSE) :
+                    link << " dest=store-" << ipr.first->get_id();
+                    break;
+                default:
+                    throw std::logic_error("Unknown data");;
+            }
+            links.push_back(link.str());
+        }
+    }
+    return links;
+}
+
+
+void save_factory_structure(Factory& factory,std::ostream& os) {
+    std::stringstream structure;
+    structure<<"; == LOADING RAMPS ==\n\n";
+    for (auto it = factory.ramp_cbegin(); it !=factory.ramp_cend() ; ++it) {
+        structure<<"LOADING_RAMP id="<<it->get_id()<<" delivery-interval="<<it->get_delivery_interval()<<"\n";
+    }
+    structure<<"\n; == WORKERS ==\n\n";
+    for(auto it = factory.worker_cbegin();it!=factory.worker_cend();++it){
+        structure<<"WORKER id="<<it->get_id()<<" processing-time="<<it->get_processing_duration()<<" queue-type="<<((it->get_queue()->get_queue_type()==PackageQueueType::LIFO) ? "LIFO" : "FIFO")<<"\n";
+    }
+    structure<<"\n; == STOREHOUSES ==\n\n";
+    for (auto it = factory.storehouse_cbegin(); it != factory.storehouse_cend(); ++it) {
+        structure<<"STOREHOUSE id="<<it->get_id()<<"\n";
+    }
+    structure<<"\n; == LINKS ==\n\n";
+    std::vector<std::string> links = LinksHelper(factory);
+    for(const auto& s:links){
+        structure<<"LINK "<< s <<"\n";
+        structure<<"\n";
+    }
+
+    os<<structure.str();
+}
