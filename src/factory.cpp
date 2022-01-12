@@ -115,6 +115,17 @@ struct ParsedLineData {
 };
 
 
+std::vector<std::string> ParsedLineData_Helper(std::string line, char delimiter) {
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream token_stream(line);
+    while (std::getline(token_stream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
+
 ParsedLineData parse_line(std::string line) {
     std::vector<std::string> tokens;
     std::string token;
@@ -124,7 +135,30 @@ ParsedLineData parse_line(std::string line) {
         tokens.push_back(token);
     }
 
+    ElementType element_type;
+    if (tokens[0] == "WORKER") {
+        element_type = ElementType::WORKER;
+    }
+    else if (tokens[0] == "LOADING_RAMP") {
+        element_type = ElementType::RAMP;
+    }
+    else if (tokens[0] == "STOREHOUSE") {
+        element_type = ElementType::STOREHOUSE;
+    }
+    else if (tokens[0] == "LINK") {
+        element_type = ElementType::LINK;
+    }
+    else {
+        throw std::runtime_error("Unknown input type");
+    }
 
+    std::map<std::string, std::string> parameters;
+    for (std::size_t t = 1; t < tokens.size(); t++) {
+        std::vector<std::string> par = ParsedLineData_Helper(tokens[t], '=');
+        parameters.insert(std::pair<std::string, std::string>(par[0], par[1]));
+    }
+    ParsedLineData pld {element_type, parameters};
+    return pld;
 }
 
 
