@@ -115,7 +115,7 @@ struct ParsedLineData {
 };
 
 
-std::vector<std::string> ParsedLineData_Helper(std::string line, char delimiter) {
+std::vector<std::string> ParsedLineDataHelper(std::string line, char delimiter) {
     std::vector<std::string> tokens;
     std::string token;
     std::istringstream token_stream(line);
@@ -154,25 +154,54 @@ ParsedLineData parse_line(std::string line) {
 
     std::map<std::string, std::string> parameters;
     for (std::size_t t = 1; t < tokens.size(); t++) {
-        std::vector<std::string> par = ParsedLineData_Helper(tokens[t], '=');
+        std::vector<std::string> par = ParsedLineDataHelper(tokens[t], '=');
         parameters.insert(std::pair<std::string, std::string>(par[0], par[1]));
     }
-    ParsedLineData pld {element_type, parameters};
-    return pld;
+    ParsedLineData parsed_line_data {element_type, parameters};
+    return parsed_line_data;
 }
 
 
 Factory load_factory_structure(std::istream& is) {
     Factory factory;
-    //..............................................................//
-    //..............................................................//
-    //..............................................................//
+    std::string line;
+
+    while (std::getline(is, line)) {
+        if (line.empty() or line[0] == ';')  {
+            continue;
+        }
+        ParsedLineData parsed_line_data = parse_line(line);
+        std::string::size_type size_type;
+
+        if (parsed_line_data.element_type == ElementType::RAMP) {
+            ElementID ramp_id = std::stoi(parsed_line_data.parameters["id"], &size_type);
+            Time delivery_interval = std::stoi(parsed_line_data.parameters["delivery-interval"], &size_type);
+            Ramp ramp {ramp_id, delivery_interval};
+            factory.add_ramp(std::move(ramp));
+
+        } else if (parsed_line_data.element_type == ElementType::WORKER) {
+            ElementID worker_id = std::stoi(parsed_line_data.parameters["id"], &size_type);
+            TimeOffset processing_time = std::stoi(parsed_line_data.parameters["processing-time"], &size_type);
+            PackageQueueType queue_type = parsed_line_data.parameters["queue-type"] == "FIFO" ? PackageQueueType::FIFO : PackageQueueType::LIFO;
+            Worker worker {worker_id, processing_time, std::make_unique<PackageQueue> (queue_type)};
+            factory.add_worker(std::move(worker));
+
+        } else if (parsed_line_data.element_type == ElementType::STOREHOUSE) {
+            ElementID storehouse_id = std::stoi(parsed_line_data.parameters["id"], &size_type);
+            Storehouse storehouse {storehouse_id};
+            factory.add_storehouse(std::move(storehouse));
+
+        } else if (parsed_line_data.element_type == ElementType::LINK) {
+
+
+        } else { throw std::logic_error("Unknown input type"); }
+    }
     return factory;
 }
 
 
-void save_factory_structure(Factory& factory,std::ostream& os) {
-    //..............................................................//
-    //..............................................................//
-    //..............................................................//
-}
+//void save_factory_structure(Factory& factory,std::ostream& os) {
+//    //..............................................................//
+//    //..............................................................//
+//    //..............................................................//
+//}

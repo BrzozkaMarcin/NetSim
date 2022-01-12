@@ -7,7 +7,7 @@
 // Adam Pękala, nr 405380
 
 //using ElementID = std::size_t;
-using ElementID = unsigned int;
+using ElementID = int;
 
 using ProbabilityGenerator = std::function<double(void)>;
 using Time = int;
