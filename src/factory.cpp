@@ -165,13 +165,13 @@ ParsedLineData parse_line(std::string line) {
 Factory load_factory_structure(std::istream& is) {
     Factory factory;
     std::string line;
+    std::string::size_type size_type;
 
     while (std::getline(is, line)) {
         if (line.empty() or line[0] == ';')  {
             continue;
         }
         ParsedLineData parsed_line_data = parse_line(line);
-        std::string::size_type size_type;
 
         if (parsed_line_data.element_type == ElementType::RAMP) {
             ElementID ramp_id = std::stoi(parsed_line_data.parameters["id"], &size_type);
@@ -192,7 +192,23 @@ Factory load_factory_structure(std::istream& is) {
             factory.add_storehouse(std::move(storehouse));
 
         } else if (parsed_line_data.element_type == ElementType::LINK) {
+            std::string src = parsed_line_data.parameters["src"];
+            std::string dest = parsed_line_data.parameters["dest"];
+            std::vector<std::string> src_tokens = ParsedLineDataHelper(src, '-');
+            std::vector<std::string> dest_tokens = ParsedLineDataHelper(dest, '-');
+            ElementID src_id = std::stoi(src_tokens[1]);
+            ElementID dest_id = std::stoi(dest_tokens[1]);
 
+            if (src_tokens[0] == "worker") {
+
+
+            } else if (src_tokens[0] == "store") {
+
+
+            } else if (src_tokens[0] == "ramp") {
+                throw std::logic_error("...");
+
+            } else { throw std::logic_error("Unknown data"); }
 
         } else { throw std::logic_error("Unknown input type"); }
     }

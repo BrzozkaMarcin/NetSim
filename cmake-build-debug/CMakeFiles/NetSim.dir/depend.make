@@ -32,6 +32,12 @@ CMakeFiles/NetSim.dir/src/package.cpp.obj: ../include/package.hpp
 CMakeFiles/NetSim.dir/src/package.cpp.obj: ../include/types.hpp
 CMakeFiles/NetSim.dir/src/package.cpp.obj: ../src/package.cpp
 
+CMakeFiles/NetSim.dir/src/reports.cpp.obj: ../include/reports.hpp
+CMakeFiles/NetSim.dir/src/reports.cpp.obj: ../src/reports.cpp
+
+CMakeFiles/NetSim.dir/src/simulation.cpp.obj: ../include/simulation.hpp
+CMakeFiles/NetSim.dir/src/simulation.cpp.obj: ../src/simulation.cpp
+
 CMakeFiles/NetSim.dir/src/storage_types.cpp.obj: ../include/package.hpp
 CMakeFiles/NetSim.dir/src/storage_types.cpp.obj: ../include/storage_types.hpp
 CMakeFiles/NetSim.dir/src/storage_types.cpp.obj: ../include/types.hpp
