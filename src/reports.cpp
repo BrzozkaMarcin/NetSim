@@ -99,6 +99,65 @@ void generate_structure_report(const Factory& f, std::ostream& os){
     os<<std::endl;
     }
 }
+
 void generate_simulation_turn_report(const Factory& f,std::ostream& os,Time t){
-    os <<"TODO";
+    os << "=== [ Turn: " << t << " ] ===" << std::endl;
+    os << "\n== WORKERS ==\n" << std::endl;
+    std::vector<const Worker*> workers_;
+    for(auto worker_i = f.worker_cbegin(); worker_i != f.worker_cend();worker_i++){
+        workers_.push_back(&(*worker_i));
+    }
+    std::sort(workers_.begin(), workers_.end(), [](const Worker*& a, const Worker*& b){
+        return a->get_id() < b->get_id();
+    });
+    for (auto i = workers_.begin(); i != workers_.end();i++){
+        os << "WORKER #" << (*i) -> get_id() << std::endl;
+        // MOZE BYC BLAD
+        if((*i) -> get_pbuffer().has_value()){
+            os << " PBuffer: #" << (*i) -> get_pbuffer() -> get_id() << " (pt = " << (*i) -> get_package_processing_start_time() << ")" << std::endl;
+        }else{
+            os << " PBuffer: (empty)" << std::endl;
+        }
+        os << " Queue :";
+        if((*i) -> get_queue()->empty()){
+            os <<" (empty)"<<std::endl;
+        }else{
+            for(auto j  =  (*i) -> get_queue() -> begin(); j != (*i) -> get_queue() -> end(); j++){
+                if(j++ == (*i) -> get_queue() -> end()){
+                    os << " #" << (*j).get_id() << std::endl;
+                }else{
+                    os << " #" << (*j).get_id() <<",";
+                }
+            }
+        }
+        if((*i) -> get_sending_buffer().has_value()){
+            os <<" SBuffer: #" << (*i) -> get_sending_buffer() -> get_id() << std::endl;
+        }else{
+            os <<" SBuffer: (empty)"<< std::endl;
+        }
+    }
+    os << std::endl;
+    os << "== STOREHOUSES =="<< std::endl;
+    std::vector<const Storehouse*> storehouses_;
+    for(auto storehouse_i = f.storehouse_cbegin(); storehouse_i != f.storehouse_cend();storehouse_i++){
+        storehouses_.push_back(&(*storehouse_i));
+    }
+    std::sort(storehouses_.begin(), storehouses_.end(), [](const Storehouse*& a, const Storehouse*& b){
+        return a->get_id() < b->get_id();
+    });
+    for(auto i = storehouses_.begin(); i != storehouses_.end(); i++){
+        os << "STOREHOUSE #" << (*i) -> get_id() << std::endl;
+        os << " Stock :";
+        if((*i) -> begin() == (*i) -> end()){
+            os << " (empty)" << std::endl;
+        }else{
+            for(auto j = (*i) -> begin(); j != (*i) -> end(); j++){
+                if(j++ == (*i) -> end()){
+                    os << " #" << (*j).get_id() << std::endl;
+                }else{
+                    os << " #" << (*j).get_id() <<",";
+                }
+            }
+        }
+    }
 }
