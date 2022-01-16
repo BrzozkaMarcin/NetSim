@@ -209,7 +209,7 @@ Factory load_factory_structure(std::istream& is) {
                     worker->receiver_preferences_.add_receiver(&(*second_worker));
                 } else { throw std::logic_error("Unknown data"); }
 
-            } else if (src_tokens[0] == "store") {
+            } else if (src_tokens[0] == "ramp") {
                 auto ramp = factory.find_ramp_by_id(src_id);
                 if (dest_tokens[0] == "worker") {
                     auto worker = factory.find_worker_by_id(dest_id);
@@ -219,7 +219,7 @@ Factory load_factory_structure(std::istream& is) {
                     ramp->receiver_preferences_.add_receiver(&(*storehouse));
                 } else { throw std::logic_error("Unknown data"); }
 
-            } else if (src_tokens[0] == "ramp") {
+            } else if (src_tokens[0] == "store") {
                 throw std::logic_error("...");
 
             } else { throw std::logic_error("Unknown data"); }
