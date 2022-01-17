@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 
+
 std::string type_to_string(PackageQueueType type){
     if(type == PackageQueueType::FIFO){
         return("FIFO");
@@ -29,7 +30,7 @@ void generate_structure_report(const Factory& f, std::ostream& os){
 
     for(auto i = ramps.begin();i != ramps.end(); i++){
         os <<"LOADING RAMP #"<< (*i)-> get_id() << std::endl;
-        os <<"  Delivery interval:" << (*i) -> get_delivery_interval() << std::endl;
+        os <<"  Delivery interval: " << (*i) -> get_delivery_interval() << std::endl;
         os <<"  Receivers:" << std::endl;
         std::vector<const IPackageReceiver*> workers;
         std::vector<const IPackageReceiver*> storehouses;
@@ -45,11 +46,12 @@ void generate_structure_report(const Factory& f, std::ostream& os){
         std::sort(storehouses.begin(),storehouses.end(),[](const IPackageReceiver*& a, const IPackageReceiver*& b){return a -> get_id() < b -> get_id();});
 
         for(auto receiver : workers){
-            os <<"   worker #" << receiver->get_id() << std::endl;
+            os <<"    worker #" << receiver->get_id() << std::endl;
         }
-        for(auto receiver : workers){
-            os <<"   storehouse #" << receiver->get_id() << std::endl;
+        for(auto receiver : storehouses){
+            os <<"    storehouse #" << receiver->get_id() << std::endl;
         }
+        os << std::endl;
     }
     // WORKERS
     os << "\n== WORKERS ==\n" << std::endl;
@@ -63,7 +65,7 @@ void generate_structure_report(const Factory& f, std::ostream& os){
     for(auto i = workers_.begin();i != workers_.end(); i++){
         os <<"WORKER #"<< (*i)-> get_id() << std::endl;
         os <<"  Processing time: " << (*i) -> get_processing_duration() << std::endl;
-        os <<"  Queue type:" << type_to_string((*i) ->get_queue()->get_queue_type());
+        os <<"  Queue type: " << type_to_string((*i) ->get_queue()->get_queue_type()) << std::endl;
         os <<"  Receivers:" << std::endl;
         std::vector<const IPackageReceiver*> workers;
         std::vector<const IPackageReceiver*> storehouses;
@@ -79,11 +81,12 @@ void generate_structure_report(const Factory& f, std::ostream& os){
         std::sort(storehouses.begin(),storehouses.end(),[](const IPackageReceiver*& a, const IPackageReceiver*& b){return a -> get_id() < b -> get_id();});
 
         for(auto receiver : workers){
-            os <<"   worker #" << receiver->get_id() << std::endl;
+            os <<"    worker #" << receiver->get_id() << std::endl;
         }
-        for(auto receiver : workers){
-            os <<"   storehouse #" << receiver->get_id() << std::endl;
+        for(auto receiver : storehouses){
+            os <<"    storehouse #" << receiver->get_id() << std::endl;
         }
+        os << std::endl;
     }
     // STOREHOUSES
     os << "\n== STOREHOUSES ==\n" << std::endl;
@@ -95,8 +98,8 @@ void generate_structure_report(const Factory& f, std::ostream& os){
         return a->get_id() < b->get_id();
     });
     for(auto i = storehouses_.begin();i != storehouses_.end(); i++){
-        os <<"WORKER #"<< (*i)-> get_id() << std::endl;
-    os<<std::endl;
+        os <<"STOREHOUSE #"<< (*i)-> get_id() << std::endl;
+        os<<std::endl;
     }
 }
 
@@ -110,34 +113,39 @@ void generate_simulation_turn_report(const Factory& f,std::ostream& os,Time t){
     std::sort(workers_.begin(), workers_.end(), [](const Worker*& a, const Worker*& b){
         return a->get_id() < b->get_id();
     });
-    for (auto i = workers_.begin(); i != workers_.end();i++){
+    for (auto i = workers_.cbegin(); i != workers_.cend();i++){
         os << "WORKER #" << (*i) -> get_id() << std::endl;
         // MOZE BYC BLAD
         if((*i) -> get_pbuffer().has_value()){
-            os << " PBuffer: #" << (*i) -> get_pbuffer() -> get_id() << " (pt = " << (*i) -> get_package_processing_start_time() << ")" << std::endl;
+            os << "  PBuffer: #" << (*i) -> get_pbuffer() -> get_id() << " (pt = " << (*i) -> get_package_processing_start_time() << ")" << std::endl;
         }else{
-            os << " PBuffer: (empty)" << std::endl;
+            os << "  PBuffer: (empty)" << std::endl;
         }
-        os << " Queue :";
-        if((*i) -> get_queue()->empty()){
+        os << "  Queue:";
+        if((*i) -> get_queue() -> empty()){
             os <<" (empty)"<<std::endl;
         }else{
+            bool first = true;
             for(auto j  =  (*i) -> get_queue() -> begin(); j != (*i) -> get_queue() -> end(); j++){
-                if(j++ == (*i) -> get_queue() -> end()){
-                    os << " #" << (*j).get_id() << std::endl;
+                if(first){
+                    os << " #" << (*j).get_id();
+                    first = false;
                 }else{
-                    os << " #" << (*j).get_id() <<",";
+                    os << ", #" << (*j).get_id();
                 }
             }
+            os << std::endl;
         }
         if((*i) -> get_sending_buffer().has_value()){
-            os <<" SBuffer: #" << (*i) -> get_sending_buffer() -> get_id() << std::endl;
+            os <<"  SBuffer: #" << (*i) -> get_sending_buffer() -> get_id() << std::endl;
         }else{
-            os <<" SBuffer: (empty)"<< std::endl;
+            os <<"  SBuffer: (empty)"<< std::endl;
         }
+        os << std::endl;
     }
     os << std::endl;
     os << "== STOREHOUSES =="<< std::endl;
+    os << std::endl;
     std::vector<const Storehouse*> storehouses_;
     for(auto storehouse_i = f.storehouse_cbegin(); storehouse_i != f.storehouse_cend();storehouse_i++){
         storehouses_.push_back(&(*storehouse_i));
@@ -147,17 +155,21 @@ void generate_simulation_turn_report(const Factory& f,std::ostream& os,Time t){
     });
     for(auto i = storehouses_.begin(); i != storehouses_.end(); i++){
         os << "STOREHOUSE #" << (*i) -> get_id() << std::endl;
-        os << " Stock :";
+        os << "  Stock:";
         if((*i) -> begin() == (*i) -> end()){
             os << " (empty)" << std::endl;
         }else{
+            bool first = true;
             for(auto j = (*i) -> begin(); j != (*i) -> end(); j++){
-                if(j++ == (*i) -> end()){
-                    os << " #" << (*j).get_id() << std::endl;
+                if(first){
+                    os << " #" << (*j).get_id();
+                    first = false;
                 }else{
-                    os << " #" << (*j).get_id() <<",";
+                    os << ", #" << (*j).get_id();
                 }
             }
+            os << std::endl;
         }
     }
+    os << std::endl;
 }

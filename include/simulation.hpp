@@ -9,8 +9,7 @@
 #include <functional>
 #include "types.hpp"
 
-void simulate(Factory& f, TimeOffset d, std::function<void(Factory&, Time)> rf){
-}
+void simulate(Factory& f, TimeOffset d, std::function<void (Factory&, Time)> rf);
 
 
 #endif //IMPLEMENTATION_SIMULATION_HPP

@@ -5,7 +5,8 @@
 // Adam Pękala, nr 405380
 
 #include "factory.hpp"
-
+#include <vector>
+#include "types.hpp"
 
 void generate_structure_report(const Factory& f, std::ostream& os);
 
