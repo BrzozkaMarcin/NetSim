@@ -45,11 +45,11 @@ void generate_structure_report(const Factory& f, std::ostream& os){
         std::sort(workers.begin(),workers.end(),[](const IPackageReceiver*& a, const IPackageReceiver*& b){return a -> get_id() < b -> get_id();});
         std::sort(storehouses.begin(),storehouses.end(),[](const IPackageReceiver*& a, const IPackageReceiver*& b){return a -> get_id() < b -> get_id();});
 
-        for(auto receiver : workers){
-            os <<"    worker #" << receiver->get_id() << std::endl;
-        }
         for(auto receiver : storehouses){
             os <<"    storehouse #" << receiver->get_id() << std::endl;
+        }
+        for(auto receiver : workers){
+            os <<"    worker #" << receiver->get_id() << std::endl;
         }
         os << std::endl;
     }
@@ -80,11 +80,11 @@ void generate_structure_report(const Factory& f, std::ostream& os){
         std::sort(workers.begin(),workers.end(),[](const IPackageReceiver*& a, const IPackageReceiver*& b){return a -> get_id() < b -> get_id();});
         std::sort(storehouses.begin(),storehouses.end(),[](const IPackageReceiver*& a, const IPackageReceiver*& b){return a -> get_id() < b -> get_id();});
 
-        for(auto receiver : workers){
-            os <<"    worker #" << receiver->get_id() << std::endl;
-        }
         for(auto receiver : storehouses){
             os <<"    storehouse #" << receiver->get_id() << std::endl;
+        }
+        for(auto receiver : workers){
+            os <<"    worker #" << receiver->get_id() << std::endl;
         }
         os << std::endl;
     }
